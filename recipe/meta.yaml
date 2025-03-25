@@ -1,5 +1,5 @@
 {% set name = "qtimageformats" %}
-{% set version = "6.7.2" %}
+{% set version = "6.7.3" %}
 
 package:
   name: {{ name }}
@@ -7,12 +7,12 @@ package:
 
 source:
   - url: https://download.qt.io/official_releases/qt/{{ version.rpartition('.')[0] }}/{{ version }}/submodules/{{ name }}-everywhere-src-{{ version }}.tar.xz
-    sha256: e1a1d8785fae67d16ad0a443b01d5f32663a6b68d275f1806ebab257485ce5d6
+    sha256: 9fd58144081654c3373768dd96ead294023830927b14fe3d3c1ef641fb324753
     folder: {{ name }}
 
 build:
   number: 0
-  skip: True  # [ppc64le or s390x]
+  skip: True  # [ppc64le or s390x or (osx and x86_64)]
   run_exports:
     - {{ pin_subpackage(name, max_pin='x.x') }}
 
