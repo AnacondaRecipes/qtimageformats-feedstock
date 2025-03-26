@@ -52,8 +52,8 @@ requirements:
 
   host:
     - qtbase {{ version }}
-    - libtiff
-    - libwebp
+    - libtiff 4.7.0
+    - libwebp {{ libwebp }}
 
   run_constrained:
     - qt-main >={{ version }},<7
