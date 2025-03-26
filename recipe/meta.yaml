@@ -1,4 +1,5 @@
 {% set name = "qtimageformats" %}
+# TODO: Rebuild 6.7.3, see https://github.com/AnacondaRecipes/qtimageformats-feedstock/pull/2
 {% set version = "6.7.2" %}
 
 package:
@@ -11,8 +12,8 @@ source:
     folder: {{ name }}
 
 build:
-  number: 0
-  skip: True  # [ppc64le or s390x]
+  number: 1
+  skip: True  # [s390x or (osx and x86_64)]
   run_exports:
     - {{ pin_subpackage(name, max_pin='x.x') }}
 
