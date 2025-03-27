@@ -11,8 +11,8 @@ source:
     folder: {{ name }}
 
 build:
-  number: 0
-  skip: True  # [ppc64le or s390x or (osx and x86_64)]
+  number: 1
+  skip: True  # [s390x or (osx and x86_64)]
   run_exports:
     - {{ pin_subpackage(name, max_pin='x.x') }}
 
@@ -51,8 +51,8 @@ requirements:
 
   host:
     - qtbase {{ version }}
-    - libtiff
-    - libwebp
+    - libtiff 4.7.0
+    - libwebp {{ libwebp }}
 
   run_constrained:
     - qt-main >={{ version }},<7
