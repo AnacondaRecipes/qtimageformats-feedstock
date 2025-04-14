@@ -6,13 +6,14 @@ package:
   version: {{ version }}
 
 source:
-  - url: https://download.qt.io/official_releases/qt/{{ version.rpartition('.')[0] }}/{{ version }}/submodules/{{ name }}-everywhere-src-{{ version }}.tar.xz
+  # Qt removed v6.7 from their Qt Downloads page to the archive
+  - url: https://download.qt.io/archive/qt/{{ version.rpartition('.')[0] }}/{{ version }}/submodules/{{ name }}-everywhere-src-{{ version }}.tar.xz
     sha256: 9fd58144081654c3373768dd96ead294023830927b14fe3d3c1ef641fb324753
     folder: {{ name }}
 
 build:
-  number: 0
-  skip: True  # [ppc64le or s390x or (osx and x86_64)]
+  number: 1
+  skip: True  # [s390x or (osx and x86_64)]
   run_exports:
     - {{ pin_subpackage(name, max_pin='x.x') }}
 
@@ -51,8 +52,8 @@ requirements:
 
   host:
     - qtbase {{ version }}
-    - libtiff
-    - libwebp
+    - libtiff {{ libtiff }}
+    - libwebp {{ libwebp }}
 
   run_constrained:
     - qt-main >={{ version }},<7
