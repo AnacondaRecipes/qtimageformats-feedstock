@@ -12,8 +12,8 @@ source:
     folder: {{ name }}
 
 build:
-  number: 3
-  skip: true  # [s390x or (osx and x86_64)]
+  number: 2
+  skip: true  # [osx and x86_64]
   run_exports:
     - {{ pin_subpackage(name, max_pin='x.x') }}
 
@@ -21,12 +21,6 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    # TODO: map CDT libdrm-devel to new X11 package
-    # - { cdt('libdrm-devel') }
-    # TODO: map CDT mesa-libgbm to new X11 package
-    # - { cdt('mesa-libgbm') }
-    # TODO: map CDT mesa-libegl-devel to new X11 package
-    # - { cdt('mesa-libegl-devel') }
     - pkg-config  # [unix]
     - bison  # [linux]
     - flex  # [linux]
@@ -42,20 +36,13 @@ requirements:
     - qtbase {{ version }}
     - libtiff {{ libtiff }}
     - libwebp {{ libwebp }}
-    - libglx
-    - libegl
-    - xorg-libice
-    - xorg-libsm
-    - xorg-libx11
-    - xorg-libxau
-    - libgl-devel
-    - mesa-dri-drivers
-    - xcb-util
-    - xcb-util-image
-    - xcb-util-keysyms
-    - xcb-util-renderutil
-    - xcb-util-wm
-    - xorg-xproto
+    # X11 dependencies
+    - libgl  # [linux]
+    - libgl-devel  # [linux]
+    - mesa-libgl-devel  # [linux]
+    - mesalib  # [linux]
+    - libegl  # [linux]
+    - libegl-devel  # [linux]
   run_constrained:
     - qt-main >={{ version }},<7
     - qt >={{ version }},<7
