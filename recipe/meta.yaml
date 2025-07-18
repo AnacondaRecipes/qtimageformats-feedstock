@@ -12,32 +12,16 @@ source:
     folder: {{ name }}
 
 build:
-  number: 1
-  skip: True  # [s390x or (osx and x86_64)]
+  number: 2
+  skip: true  # [osx and x86_64]
   run_exports:
     - {{ pin_subpackage(name, max_pin='x.x') }}
 
 requirements:
   build:
+    - {{ stdlib('c') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - {{ cdt('libdrm-devel') }}               # [linux]
-    - {{ cdt('libglvnd-glx') }}               # [linux and not x86_64]
-    - {{ cdt('libglvnd-egl') }}               # [linux and not x86_64]
-    - {{ cdt('libice-devel') }}               # [linux]
-    - {{ cdt('libsm-devel') }}                # [linux]
-    - {{ cdt('libx11-devel') }}               # [linux]
-    - {{ cdt('libxau-devel') }}               # [linux]
-    - {{ cdt('mesa-libgl-devel') }}           # [linux]
-    - {{ cdt('mesa-libgbm') }}                # [linux]
-    - {{ cdt('mesa-libegl-devel') }}          # [linux]
-    - {{ cdt('mesa-dri-drivers') }}           # [linux]
-    - {{ cdt('xcb-util-devel') }}             # [linux]
-    - {{ cdt('xcb-util-image-devel') }}       # [linux]
-    - {{ cdt('xcb-util-keysyms-devel') }}     # [linux]
-    - {{ cdt('xcb-util-renderutil-devel') }}  # [linux]
-    - {{ cdt('xcb-util-wm-devel') }}          # [linux]
-    - {{ cdt('xorg-x11-proto-devel') }}       # [linux]
     - pkg-config  # [unix]
     - bison       # [linux]
     - flex        # [linux]
@@ -49,20 +33,18 @@ requirements:
     - cmake
     - ninja
     - perl
-
   host:
-    - qtbase {{ version }}
+    - qtbase-devel {{ version }}
     - libtiff {{ libtiff }}
     - libwebp {{ libwebp }}
-
   run_constrained:
     - qt-main >={{ version }},<7
     - qt >={{ version }},<7
 
 test:
   commands:
-    - test -f $PREFIX/lib/qt6/plugins/imageformats/libqtiff${SHLIB_EXT}                 # [unix]
-    - test -f $PREFIX/lib/qt6/plugins/imageformats/libqwebp${SHLIB_EXT}                 # [unix]
+    - test -f $PREFIX/lib/qt6/plugins/imageformats/libqtiff${SHLIB_EXT}  # [unix]
+    - test -f $PREFIX/lib/qt6/plugins/imageformats/libqwebp${SHLIB_EXT}  # [unix]
     - if not exist %PREFIX%\\Library\\lib\\qt6\\plugins\\imageformats/qtiff.dll exit 1  # [win]
     - if not exist %PREFIX%\\Library\\lib\\qt6\\plugins\\imageformats/qwebp.dll exit 1  # [win]
 
