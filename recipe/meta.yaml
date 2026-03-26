@@ -36,6 +36,7 @@ requirements:
     - qtbase-devel {{ version }}
     - libtiff {{ libtiff }}
     - libwebp {{ libwebp }}
+    - pcre2 {{ pcre2 }}
 
 test:
   commands:
