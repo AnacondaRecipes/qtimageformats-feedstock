@@ -11,7 +11,6 @@ cmake --log-level STATUS -S"%SRC_DIR%/%PKG_NAME%" -B"%SRC_DIR%\build" -GNinja ^
     -DINSTALL_INCLUDEDIR=include/qt6 ^
     -DINSTALL_MKSPECSDIR=lib/qt6/mkspecs ^
     -DINSTALL_EXAMPLESDIR=share/doc/qt6/examples ^
-    -DINSTALL_DATADIR=share/qt6 ^
     -DQT_FEATURE_system_tiff=ON ^
     -DQT_FEATURE_system_webp=ON ^
     -DQT_FEATURE_jasper=OFF
